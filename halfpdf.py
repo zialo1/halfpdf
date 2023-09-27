@@ -36,9 +36,9 @@ parser.add_argument('-3', '--script3',
                     action='store_true', 
     help='cut for settings script3 (modify code here)')
 parser.add_argument('-tf', '--topframe',nargs=4,
-    help='give parameters for topframe (not implemented)')
+    help='give coordinates for topframe (topleft_x,tleft_y,bottomright_x, bottomright_y). Topleft corner is (0,0). (not implemented)')
 parser.add_argument('-bf', '--bottomframe',nargs=4,
-    help='give parameters for top frame (not implemented)')
+    help='give coordinates for top frame (topleft_x,tleft_y,bottomright_x, bottomright_y. Topleft corner is (0,0). (not implemented)')
 
 # parse arguments
 args = parser.parse_args()
@@ -96,7 +96,7 @@ if args.verbose:
         f'(width={width} height={height})')
     print(f'outfile is {outfile}')
 
-    print('cutting into top and into bottom: (xtop,ytop,width,yend)')
+    print('cutting into top and  bottom frames: format (xtop,ytop,width,yend)')
 
     print("TOP--- ({:>5},{:>5},{:>5},{:>5})".format(
 xstart,ystart,width,ystart+height))
