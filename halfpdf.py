@@ -1,5 +1,5 @@
 #!python v0.01
-# Author A.Hanselmann, 1.sept2023 (c) LGPL3.0
+# Author A.Hanselmann, 27/sept/2023 (c) GNU GPL 3.0
 
 #2do comandline width/height/padding input
 # in order for fitz library to, run  "pip install pymupdf"
