@@ -69,7 +69,7 @@ elif args.script2:
     (xstart,width) = (xstart+20,xend-xstart-30)
     (ystart,yend) = (ystart+50,yend-50)
     height = (yend-ystart)/2
-    padding=20
+    ypadding=20
 # enter your own values here
 elif args.script3:
     (xstart,width) = (xstart+20,xend-xstart)
