@@ -1,8 +1,9 @@
-#!python v0.01
-# Author A.Hanselmann, 27/sept/2023 (c) GNU GPL 3.0
+#!python3
+# version v0.01 - 2023-09-27
+# Author A.Hanselmann,(c) GNU GPL 3.0
 
 #2do comandline width/height/padding input
-# in order for fitz library to, run  "pip install pymupdf"
+# to install "fitz" library run "pip install pymupdf"
 
 import fitz
 import os,argparse,sys
@@ -11,7 +12,7 @@ import os,argparse,sys
 parser = argparse.ArgumentParser(
                     prog='halfpdf',
                     description='generates a pdf with 2 pages for ever page',
-                    epilog='Consider running in cli mode')
+                    epilog='Consider running in cli mode (not implemented)')
 
 parser.add_argument('filename')    
 parser.add_argument('-dd', '--script1del',
