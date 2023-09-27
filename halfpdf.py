@@ -11,7 +11,7 @@ import os,argparse,sys
 # argument parser setop
 parser = argparse.ArgumentParser(
                     prog='halfpdf',
-                    description='generates a pdf with 2 pages for ever page',
+                    description='generates a pdf with 2 pages for every page',
                     epilog='Consider running in cli mode (not implemented)')
 
 parser.add_argument('filename')    

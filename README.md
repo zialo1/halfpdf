@@ -7,3 +7,7 @@ currently under development
 
 ## version history
 v01 is running properly on local installation (mac)
+
+
+## help
+run tool with '--help' to read instructions
