@@ -2,9 +2,12 @@
 # version v0.01 - 2023-09-27
 # Author A.Hanselmann,(c) GNU GPL 3.0
 
-#2do comandline width/height/padding input
 # to install "fitz" library run "pip install pymupdf"
+# --------------------------------------
+#2do comandline width/height/padding input
+#2do change limited option into -l number
 
+# --------------------------------------
 import fitz
 import os,argparse,sys
 
@@ -36,9 +39,9 @@ parser.add_argument('-3', '--script3',
                     action='store_true', 
     help='cut for settings script3 (modify code here)')
 parser.add_argument('-tf', '--topframe',nargs=4,
-    help='give coordinates for topframe (topleft_x,tleft_y,bottomright_x, bottomright_y). Topleft corner is (0,0). (not implemented)')
+    help='set coordinates for top frame (topleft_x,tleft_y,bottomright_x, bottomright_y). Topleft corner is (0,0). (not implemented)')
 parser.add_argument('-bf', '--bottomframe',nargs=4,
-    help='give coordinates for top frame (topleft_x,tleft_y,bottomright_x, bottomright_y. Topleft corner is (0,0). (not implemented)')
+    help='set coordinates for bottom frame (x1,y1,x2,y2). (not implemented)')
 
 # parse arguments
 args = parser.parse_args()
@@ -98,9 +101,9 @@ if args.verbose:
 
     print('cutting into top and  bottom frames: format (xtop,ytop,width,yend)')
 
-    print("TOP--- ({:>5},{:>5},{:>5},{:>5})".format(
+    print("TOP--- ({:>5},{:>5}, {:>+5},{:>5})".format(
 xstart,ystart,width,ystart+height))
-    print("BOTTOM ({:>5},{:>5},{:>5},{:>5})".format(
+    print("BOTTOM ({:>5},{:>5}, {:>+5},{:>5})".format(
 xstart,yend-height,width,yend))
 
 # --------------------------------------
