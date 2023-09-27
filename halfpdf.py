@@ -8,6 +8,7 @@
 import fitz
 import os,argparse,sys
 
+# --------------------------------------
 # argument parser setop
 parser = argparse.ArgumentParser(
                     prog='halfpdf',
@@ -16,7 +17,7 @@ parser = argparse.ArgumentParser(
 
 parser.add_argument('filename')    
 parser.add_argument('-dd', '--script1del',
-                    action='store_true', help='remove blank pages at beginning')
+                    action='store_true', help='remove from output specific ( blank ) pages')
 parser.add_argument('-l', '--limited',
                     action='store_true', help='limit number of pages processd to 30')
 parser.add_argument('-v', '--verbose',
@@ -34,14 +35,17 @@ parser.add_argument('-2', '--script2',
 parser.add_argument('-3', '--script3',
                     action='store_true', 
     help='cut for settings script3 (modify code here)')
-
-
+parser.add_argument('-tf', '--topframe',nargs=4,
+    help='give parameters for topframe (not implemented)')
+parser.add_argument('-bf', '--bottomframe',nargs=4,
+    help='give parameters for top frame (not implemented)')
 
 # parse arguments
 args = parser.parse_args()
 
-if not args.script1 and not args.script2 and not args.split:
-    print('nothing to, choose mode script1, script2 or split')
+# check on mode
+if not args.script1 and not args.script2 and not args.script3 and not args.split:
+    print('nothing to do. Coose mode (e.g script1 )  or activate mode --split')
     sys.exit()
 
 # readin file twice, file is first positioal argument
@@ -57,7 +61,6 @@ ypadding =0
 
 # check on simple split mode
 if args.split: 
-    (xstart, ystart, xend, yend ) = p.cropbox
     width = xend - xstart 
     height = (yend-ystart)/2 
 # check other modes 1/2/3, modify 3 for your own values
@@ -76,32 +79,32 @@ elif args.script3:
     (ystart,yend) = (ystart+50,yend-50)
     height = (yend-ystart)/2+20
 
-# set pages processed
+# set pages processed, dummy unless --limit is specified
 maxpages=30
 
 if not args.limited or maxpages > doc1.page_count:
    maxpages=doc1.page_count
 
-# generate outputfilename from  inputfile_out.pdf'
+# generate outputfilename from inputfile_out.pdf'
 filename=os.path.splitext(args.filename)
 outfile=f'{filename[0]}_out{filename[1]}'
 
 
-
 if args.verbose:
-    print ("Document has dimensions=",p.cropbox, " (topx,topy,botx,boty)")
-
-    print(f'cutting top ({xstart},{ystart},{width},{ystart+height} and', 
-        f'bottom = ({xstart},{yend-height},{width},{yend})')
-
-    print(f' input is truncated after {maxpages} pages, output {2 * maxpages} pages', 
+    print("Document has dimensions=",p.cropbox, " (topx,topy,botx,boty)")
+    print(f'The input is truncated/has  {maxpages} pages, output {2 * maxpages} pages', 
         f'(width={width} height={height})')
-
     print(f'outfile is {outfile}')
 
+    print('cutting into top and into bottom: (xtop,ytop,width,yend)')
 
+    print("TOP--- ({:>5},{:>5},{:>5},{:>5})".format(
+xstart,ystart,width,ystart+height))
+    print("BOTTOM ({:>5},{:>5},{:>5},{:>5})".format(
+xstart,yend-height,width,yend))
 
-# do the cutting
+# --------------------------------------
+# main part: do the cutting
 for a in range(maxpages):
 
     pageup=doc1[a]
